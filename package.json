@@ -16,6 +16,8 @@
     "svelte": "^3.0.0"
   },
   "dependencies": {
+    "date-format": "^3.0.0",
+    "encoding-japanese": "^1.0.30",
     "papaparse": "^5.1.1",
     "sirv-cli": "^0.4.4"
   }
