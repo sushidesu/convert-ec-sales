@@ -23,12 +23,18 @@
   }
 
   .container {
-    width: 500px;
+    max-width: 500px;
     margin: 0 auto;
     border: 1px solid #ccc;
+    border-radius: 8px;
   }
   ul {
     text-align: start;
     list-style: none;
   }
+  @media (max-width: 640px) {
+		.container {
+			max-width: none;
+		}
+	}
 </style>
