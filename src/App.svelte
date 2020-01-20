@@ -3,6 +3,7 @@
 	import Format from "date-format"
 	import { read, convert, write } from "./convertEC"
 	import Description from "./Description.svelte"
+	import Footer from "./Footer.svelte"
 
 	const onClick = async () => {
 		if (files.length === 0) return
@@ -13,25 +14,36 @@
 	}
 </script>
 
-<main>
-	<h1>Convert EC sales</h1>
-	<p>各ショップの売上csvを在庫管理システムに取り込める形に変換します。</p>
-	<div class="convert">
-		<input type="file" bind:files={files} />
-		<button on:click={onClick}>変換</button>
-	</div>
+<div class="wrapper">
+	<main>
+		<h1>Convert EC sales</h1>
+		<p>各ショップの売上csvを在庫管理システムに取り込める形に変換します。</p>
+		<div class="convert">
+			<input type="file" bind:files={files} />
+			<button on:click={onClick}>変換</button>
+		</div>
+	
+		<hr>
+	
+		<Description />
+	</main>
 
-	<hr>
-
-	<Description />
-</main>
+	<Footer />
+</div>
 
 <style>
+	.wrapper {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		min-height: 100%;
+	}
+
 	main {
 		text-align: center;
 		padding: 1em;
-		max-width: none;
-		margin: 0 auto;
+		margin: 0;
+		flex: 1;
 	}
 
 	h1 {
