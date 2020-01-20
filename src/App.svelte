@@ -4,10 +4,9 @@
 	import { read, convert, write } from "./convertEC"
 
 	const onClick = async () => {
-		if (files.length === 0) return;
+		if (files.length === 0) return
 		const text = await read(files[0])
 		const converted = convert(text)
-		console.log(converted)
 		const filename = Format.asString("net_yyyyMMdd_hhmmss", new Date())
 		write(converted, filename)
 	}
