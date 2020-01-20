@@ -2,6 +2,7 @@
 	export let files
 	import Format from "date-format"
 	import { read, convert, write } from "./convertEC"
+	import Description from "./Description.svelte"
 
 	const onClick = async () => {
 		if (files.length === 0) return
@@ -16,7 +17,10 @@
 	<h1>Convert EC sales</h1>
 	<input type="file" bind:files={files} />
 	<button on:click={onClick}>OK</button>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
+	<p>各ショップの売上csvを在庫管理システムに取り込める形に変換します。</p>
+
+	<hr>
+	<Description />
 </main>
 
 <style>
