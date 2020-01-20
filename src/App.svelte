@@ -1,5 +1,6 @@
 <script>
 	export let files
+	import Format from "date-format"
 	import { read, convert, write } from "./convertEC"
 
 	const onClick = async () => {
@@ -7,7 +8,8 @@
 		const text = await read(files[0])
 		const converted = convert(text)
 		console.log(converted)
-		write(converted, "now")
+		const filename = Format.asString("net_yyyyMMdd_hhmmss", new Date())
+		write(converted, filename)
 	}
 </script>
 
