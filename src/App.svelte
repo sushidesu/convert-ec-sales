@@ -1,12 +1,13 @@
 <script>
 	export let files
-	import { read, convert } from "./convertEC"
+	import { read, convert, write } from "./convertEC"
 
 	const onClick = async () => {
 		if (files.length === 0) return;
 		const text = await read(files[0])
 		const converted = convert(text)
 		console.log(converted)
+		write(converted, "now")
 	}
 </script>
 

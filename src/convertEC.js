@@ -1,4 +1,5 @@
 import Papa from "papaparse"
+import Encoding from "encoding-japanese"
 
 export const read = (file) => {
   const reader = new FileReader()
@@ -34,9 +35,22 @@ export const convert = (text) => {
     row => [row.JANコード, row.商品名, "", "", "", "", "", row.個数]
   )
   const result = header.concat(content)
-  return result
+  return Papa.unparse(result)
 }
 
-export const write = (text) => {
-  
+export const write = (text, filename) => {
+  const unicodeList = []
+  for (let i=0; i<text.length; ++i) {
+    unicodeList.push(text.charCodeAt(i))
+  }
+
+  const shiftJisCodeList = Encoding.convert(unicodeList, 'SJIS', 'UNICODE')
+  const uInt8List = new Uint8Array(shiftJisCodeList)
+  const blob = new Blob([ uInt8List ], { type: "text/csv" })
+
+  const hiddenElement = document.createElement("a")
+  hiddenElement.href = window.URL.createObjectURL(blob)
+  hiddenElement.target = '_blank'
+  hiddenElement.download = `${filename}.csv`
+  hiddenElement.click()
 }
