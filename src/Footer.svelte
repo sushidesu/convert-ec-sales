@@ -1,5 +1,8 @@
 <footer>
-  <a href="https://github.com/sushi-desu/convert-ec-sales">This site</a> is made with <a href="https://svelte.dev/">Svelte</a>.
+  <a href="https://github.com/sushi-desu/convert-ec-sales">This site</a>
+  is made with
+  <a href="https://svelte.dev/">Svelte</a>
+  .
 </footer>
 
 <style>
