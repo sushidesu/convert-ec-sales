@@ -1,16 +1,19 @@
 <script>
   export let files
   import Format from "date-format"
-  import { read, convert, write } from "./convertEC"
+  import { read, convert, header, write } from "./convertEC"
   import Description from "./Description.svelte"
   import Footer from "./Footer.svelte"
 
   const onClick = async () => {
-    if (files.length === 0) return
-    const text = await read(files[0])
-    const converted = convert(text)
+    const converted = await Array.from(files)
+      .map(file => read(file))
+      .map(async text => convert(await text))
+      .reduce(async (acu, cur) => acu.concat(await cur), [])
+
+    const csv = header().concat(converted)
     const filename = Format.asString("net_yyyyMMdd_hhmmss", new Date())
-    write(converted, filename)
+    write(csv, filename)
   }
 </script>
 
