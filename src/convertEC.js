@@ -16,22 +16,40 @@ export const convert = text => {
   const parsed = Papa.parse(text, {
     header: true
   })
-  const result = parsed.data.map(row => [
-    row.JANコード,
-    row.商品名,
-    row.日付,
-    "",
-    "",
-    "",
-    "",
-    row.個数
-  ])
+  const result = parsed.data.map(row => {
+    if ("日付" in row) {
+      return [
+        row.JANコード,
+        row.商品名,
+        row.商品価格,
+        row.日付,
+        row.処理状況,
+        "MakeShop",
+        "",
+        row.個数
+      ]
+    } else if ("注文日" in row) {
+      return [
+        row.商品番号,
+        row.商品名,
+        row.単価,
+        row.注文日,
+        row.ステータス,
+        "楽天",
+        "",
+        row.個数
+      ]
+    } else {
+      alert("エラー：対応していないファイルです。")
+      throw Error("Invalid file imported")
+    }
+  })
   return result
 }
 
 export const addHeader = content => {
   const mindate = content
-    .map(row => new Date(row[2]))
+    .map(row => new Date(row[3]))
     .reduce((acc, cur) => (cur < acc ? cur : acc), new Date())
   const date = new Date(mindate)
   const header = [
@@ -47,7 +65,7 @@ export const addHeader = content => {
     ],
     [],
     [],
-    ["コード", "商品名", "注文日", "", "", "", "", "点数"],
+    ["コード", "商品名", "価格", "注文日", "ステータス", "サイト", "", "点数"],
     []
   ]
   return header.concat(content)
