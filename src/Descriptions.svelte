@@ -3,7 +3,8 @@
   <h3>Makeshop</h3>
   <div class="container">
     <ul>
-      <li>注文管理</li>
+      <li>管理画面トップ</li>
+      <li>>> 注文管理</li>
       <li>>> 期間: 前日、処理区分: 全て</li>
       <li>>> この内容でCSVを作成する</li>
       <li>>> CSV形式: 普通用、出力するテンプレート: 在庫管理用</li>
@@ -14,7 +15,8 @@
   <h3>Rakuten</h3>
   <div class="container">
     <ul>
-      <li>受注・決済管理</li>
+      <li>RMSトップ</li>
+      <li>>> 受注・決済管理</li>
       <li>>> 受注・問い合わせ管理</li>
       <li>>> データダウンロード</li>
       <li>>> 通常購入データ</li>
@@ -45,6 +47,9 @@
   ul {
     text-align: start;
     list-style: none;
+  }
+  ul li:not(:first-child) {
+    padding-left: 0.4em;
   }
   @media (max-width: 640px) {
     .container {
