@@ -2,7 +2,7 @@
   export let files
   import Format from "date-format"
   import { read, convert, addHeader, write } from "./convertEC"
-  import Description from "./Description.svelte"
+  import Descriptions from "./Descriptions.svelte"
   import Footer from "./Footer.svelte"
 
   const onClick = async () => {
@@ -31,7 +31,7 @@
 
     <hr />
 
-    <Description />
+    <Descriptions />
   </main>
 
   <Footer />
