@@ -1,7 +1,7 @@
 <script>
   export let files
   import Format from "date-format"
-  import { read, convert, header, write } from "./convertEC"
+  import { read, convert, addHeader, write } from "./convertEC"
   import Description from "./Description.svelte"
   import Footer from "./Footer.svelte"
 
@@ -14,7 +14,7 @@
         return all.concat(await cur)
       }, [])
 
-    const csv = header().concat(converted)
+    const csv = addHeader(converted)
     const filename = Format.asString("net_yyyyMMdd_hhmmss", new Date())
     write(csv, filename)
   }

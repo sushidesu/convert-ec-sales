@@ -19,7 +19,7 @@ export const convert = text => {
   const result = parsed.data.map(row => [
     row.JANコード,
     row.商品名,
-    "",
+    row.日付,
     "",
     "",
     "",
@@ -29,9 +29,12 @@ export const convert = text => {
   return result
 }
 
-export const header = datetext => {
-  const date = datetext ? new Date(datetext) : new Date()
-  return [
+export const addHeader = content => {
+  const mindate = content
+    .map(row => new Date(row[2]))
+    .reduce((acc, cur) => (cur < acc ? cur : acc), new Date())
+  const date = new Date(mindate)
+  const header = [
     ["商品別実績"],
     ["検索条件：工場 [ すべて ] 店舗 [ ネット ] "],
     [
@@ -44,9 +47,10 @@ export const header = datetext => {
     ],
     [],
     [],
-    ["コード", "商品名", "売上", "", "", "", "", "点数"],
+    ["コード", "商品名", "注文日", "", "", "", "", "点数"],
     []
   ]
+  return header.concat(content)
 }
 
 export const write = (textlist, filename) => {
