@@ -25,7 +25,12 @@
     <h1>Convert EC sales</h1>
     <p>各ショップの売上csvを在庫管理システムに取り込める形に変換します。</p>
     <div class="convert">
-      <input type="file" accept=".csv" multiple="multiple" bind:files />
+      <input
+        class="input"
+        type="file"
+        accept=".csv"
+        multiple="multiple"
+        bind:files />
       <button on:click={onClick}>変換</button>
     </div>
 
@@ -59,7 +64,19 @@
     font-weight: bold;
   }
 
+  hr {
+    border-top: 1px solid #ccc;
+    transform: scaleX(1.04);
+  }
+
   .convert {
     margin: 3em 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .input {
+    width: 100%;
+    height: 100px;
+    border: 2px dashed #ccc;
   }
 </style>
