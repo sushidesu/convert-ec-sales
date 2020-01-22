@@ -6,6 +6,7 @@
   import Footer from "./Footer.svelte"
 
   const onClick = async () => {
+    if (files.length === 0) return
     const converted = await Array.from(files)
       .map(file => read(file))
       .map(async text => convert(await text))
