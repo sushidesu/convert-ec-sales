@@ -9,7 +9,10 @@
     const converted = await Array.from(files)
       .map(file => read(file))
       .map(async text => convert(await text))
-      .reduce(async (acu, cur) => acu.concat(await cur), [])
+      .reduce(async (acu, cur) => {
+        const all = await acu
+        return all.concat(await cur)
+      }, [])
 
     const csv = header().concat(converted)
     const filename = Format.asString("net_yyyyMMdd_hhmmss", new Date())
@@ -22,7 +25,7 @@
     <h1>Convert EC sales</h1>
     <p>各ショップの売上csvを在庫管理システムに取り込める形に変換します。</p>
     <div class="convert">
-      <input type="file" bind:files />
+      <input type="file" multiple="multiple" bind:files />
       <button on:click={onClick}>変換</button>
     </div>
 
