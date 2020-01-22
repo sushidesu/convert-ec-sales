@@ -16,11 +16,22 @@ export const convert = text => {
   const parsed = Papa.parse(text, {
     header: true
   })
+  const result = parsed.data.map(row => [
+    row.JANコード,
+    row.商品名,
+    "",
+    "",
+    "",
+    "",
+    "",
+    row.個数
+  ])
+  return result
+}
 
-  const date =
-    parsed.data.length !== 0 ? new Date(parsed.data[0].日付) : new Date()
-
-  const header = [
+export const header = datetext => {
+  const date = datetext ? new Date(datetext) : new Date()
+  return [
     ["商品別実績"],
     ["検索条件：工場 [ すべて ] 店舗 [ ネット ] "],
     [
@@ -36,22 +47,11 @@ export const convert = text => {
     ["コード", "商品名", "売上", "", "", "", "", "点数"],
     []
   ]
-  const content = parsed.data.map(row => [
-    row.JANコード,
-    row.商品名,
-    "",
-    "",
-    "",
-    "",
-    "",
-    row.個数
-  ])
-  const result = header.concat(content)
-  return Papa.unparse(result)
 }
 
-export const write = (text, filename) => {
+export const write = (textlist, filename) => {
   const unicodeList = []
+  const text = Papa.unparse(textlist)
   for (let i = 0; i < text.length; ++i) {
     unicodeList.push(text.charCodeAt(i))
   }
